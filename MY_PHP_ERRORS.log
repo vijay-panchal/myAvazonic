@@ -1,0 +1,6 @@
+[23-Jun-2015 15:28:06 Europe/Berlin] PHP Fatal error:  Call to undefined function form_open() in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\views\pages\login.php on line 5
+[23-Jun-2015 15:28:28 Europe/Berlin] PHP Fatal error:  Call to undefined function form_open() in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\views\pages\login.php on line 5
+[23-Jun-2015 15:31:58 Europe/Berlin] PHP Parse error:  syntax error, unexpected '$password' (T_VARIABLE), expecting ')' in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\controllers\account.php on line 28
+[23-Jun-2015 15:31:59 Europe/Berlin] PHP Parse error:  syntax error, unexpected '$password' (T_VARIABLE), expecting ')' in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\controllers\account.php on line 28
+[23-Jun-2015 15:32:16 Europe/Berlin] PHP Parse error:  syntax error, unexpected '$password' (T_VARIABLE), expecting ')' in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\controllers\account.php on line 28
+[23-Jun-2015 16:01:34 Europe/Berlin] PHP Fatal error:  Cannot use object of type stdClass as array in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\controllers\account.php on line 49

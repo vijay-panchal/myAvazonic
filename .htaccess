@@ -1,0 +1,8 @@
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
+Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
+
+<IfModule mod_php5.c>
+php_flag log_errors on 
+php_value error_log D:/xampp/htdocs/clients/beta.myAvazonic.com/www/MY_PHP_ERRORS.log
+</IfModule>
