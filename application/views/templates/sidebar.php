@@ -1,7 +1,16 @@
 <div class="span3">
                         <div class="sidebar">
+
                             <ul class="widget widget-menu unstyled">
                                 <li class="active"><a href="index.html"><i class="menu-icon icon-dashboard"></i>Dashboard
+                                </a></li>
+								<li class="active"><a href="<?php echo base_url(); ?>index.php/user/manage"><i class="menu-icon icon-dashboard"></i>Admin Users
+                                </a></li>
+								<li class="active"><a href="<?php echo base_url(); ?>index.php/user/cust_manage"><i class="menu-icon icon-dashboard"></i>Customer Management
+                                </a></li>
+								<li class="active"><a href="<?php echo base_url(); ?>index.php/user/sp_manage"><i class="menu-icon icon-dashboard"></i>Service Professional Management
+                                </a></li>
+								<li class="active"><a href="index.html"><i class="menu-icon icon-dashboard"></i>Add Role
                                 </a></li>
                                 <li><a href="activity.html"><i class="menu-icon icon-file"></i>New Requirement </a>
                                 </li>

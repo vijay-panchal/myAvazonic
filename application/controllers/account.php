@@ -26,6 +26,8 @@ class Account extends CI_Controller {
         $data['title'] = 'My Avazonic :: ';
 		
 		$username = $this->input->post('username');
+		//echo $username;
+		//exit;
 		if($username!='')
 		{
 			$password = $this->input->post('password');
@@ -35,7 +37,7 @@ class Account extends CI_Controller {
 			
 			
 			$params=array(
-				'access_token' 	=> ACCESS_TOKEN.'12334',
+				'access_token' 	=> ACCESS_TOKEN,
 				'cmd'			=> 'user_login',
 				'username' 		=> $username,
 				'password' 		=> $password,
@@ -44,11 +46,12 @@ class Account extends CI_Controller {
 			$this->curl->post(json_encode($params));
 			
 			$result = json_decode($this->curl->execute());
-			print_r($result);exit;
+			
+			//print_r($result);exit;
 			$this->session->set_userdata($result->apidata);
 			$res_session=$this->session->all_userdata();
 			
-			//redirect('/home', 'location');
+			redirect('/home', 'location');
 		}
 		
 		

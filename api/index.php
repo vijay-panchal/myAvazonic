@@ -1,6 +1,16 @@
 <?php
 
 require 'Slim/Slim.php';
+require 'Slim/db.php';
+
+/******************************** Database Connection ***************************************************************/
+
+$db_host="127.0.0.1";
+$db_user="root";
+$db_pass="";
+$db_name="myavazone_db";
+
+/******************************** Database Connection ***************************************************************/
 
 ini_set("log_errors", 1);
 ini_set("error_log", "./error_log/php-error.log");
@@ -10,6 +20,12 @@ $app = new Slim();
 
 $app->post('/users', 'UserAction');
 $app->get('/users/:id',	'getUser');
+
+/**************** customer *************************/
+$app->post('/customers', 'CustomerAction');
+/**************** End customer *************************/
+
+$app->get('/test/:id','GetvalidUserDetails');
 /*
 $app->get('/wines/search/:query', 'findByName');
 $app->post('/wines', 'addWine');
@@ -32,20 +48,24 @@ function UserAction()
 	{
 		$status_token=validate_token($user->access_token);
 		
-		echo '{"error":{"text":'.json_encode($status_token).'}}'; exit;
+		//echo '{"error":{"text":"'.$status_token.'"}}'; exit;
 		if($status_token=='valid')
 		{
 			//update_token($user->access_token);
-			//echo '{"error":{"text":'.json_encode($user->cmd).'}}'; exit;
+			//echo '{"error":{"text":"'.$user->cmd.'"}}'; exit;
 			switch($user->cmd){
 				case 'user_login':
 						$params=array(
 							'username'		=> $user->username
 						);
 						$get_user=GetvalidUserDetails($params);
-						
+						//echo '{"error":{"text":'.json_encode($get_user).'}}'; exit;
 						$hash_password=md5($user->password);
 						
+						//	echo '{"error":{"text":"'.$get_user->hash_password.'"}}'; exit;
+						//	echo '{"error":{"text":"hi"}}'; 
+						//	echo '{"error":{"text":"'.$get_user->hash_password.'"}}'; exit;
+
 						if($hash_password==$get_user->hash_password)
 						{
 							if($get_user->is_active=="Y")
@@ -87,6 +107,53 @@ function UserAction()
 	
 }
 
+function CustomerAction()
+{
+	$request = Slim::getInstance()->request();
+	$customer = json_decode($request->getBody());
+	//echo '{"users": ' . json_encode($user) . '}';exit;
+	$token=$customer->access_token;
+	//echo '{"error":{"text":"'.$token.'"}}'; exit;
+	if($customer->access_token	!=	"")
+	{
+		$status_token=validate_token($customer->access_token);
+		//echo '{"error":{"text":"'.$status_token.'"}}'; exit;
+		if($status_token=='valid')
+		{
+					   
+            $sql = "INSERT INTO user_profile (firstname, lastname) VALUES ('".$customer->first_name."', '".$customer->last_name."' )";
+					  
+			$db_host="127.0.0.1";
+			$db_user="root";
+			$db_pass="";
+			$db_name="myavazone_db";
+
+			$db = new DB();
+			$db->connect($db_host, $db_user, '', false, false, $db_name, 'tbl_');
+			$res_q = $db->query($sql); 
+			echo '{"apidata": "User Added Sucessfully."}';
+			
+			exit;
+			break;
+		}
+			//echo '{"error":{"text":'.mc_encrypt($user->password,$user->key).'}}';
+			echo '{"error":{"text":"Token is valid"}}'; 
+	    }
+		else{
+			echo '{"error":{"text":"Token is not valid"}}'; 
+		}
+	}
+	else
+	{
+		echo '{"error":{"text":"Token is NULL"}}'; 
+	}
+	
+	/*$user_details=array(
+		'password_hash'	=>	mc_encrypt('admin@123','d0a7e7997b6d5fcd55f4b5c32611b87cd923e88837b63bf2941ef819dc8ca282')
+	);*/
+	
+}
+
 function GetvalidUserDetails($param)
 {
 	try {
@@ -95,22 +162,37 @@ function GetvalidUserDetails($param)
 				WHERE 1 ";
 				if(isset($param['username']) && $param['username']!='')
 				{
-					$sql .= " AND username=:username";
+					$sql .= " AND username='".$param['username']."'";
 				}
-	
-		$db = getConnection();
-		$stmt = $db->prepare($sql);  
+	    
+		$db_host="127.0.0.1";
+		$db_user="root";
+		$db_pass="";
+		$db_name="myavazone_db";
+
+		$db = new DB();
+		$db->connect($db_host, $db_user, '', false, false, $db_name, 'tbl_');
+        $res_q = $db->query($sql); 
+      
+		
 		if(isset($param['username']) && $param['username']!='')
 		{
 			$username=trim($param['username']);
-			$stmt->bindParam("username", $username);
 		}
-		$stmt->execute();
-		$res = $stmt->fetchObject();  
+		$res_array = $db->fetch_all_array($res_q);  
+		//echo '{"error":{"text":'.json_encode($res_array).'}}'; exit;
+		/*$res = () stdClass();
+		/*foreach($res_array as $key=>$value)
+		{
+		  $res->$key = $value;
+		}*/
+		$res_ar = json_decode(json_encode($res_array), FALSE);
+		$res=$res_ar[0];
+        //echo '{"error":{"text":"'.$res->hash_password.'"}}'; exit;
 		$db = null;
 		return $res;
 		
-	} catch(PDOException $e) {
+	} catch(Exception $e) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
 	}
 }
@@ -143,15 +225,18 @@ function mc_decrypt($decrypt, $key){
 
 
 function validate_token($token) {
-	$sql = "SELECT * FROM access_token WHERE token=':token'";
-	echo '{"error":{"text":'. $sql .'}}'; exit;
+	$sql = "SELECT * FROM access_token WHERE token='".$token."'";
+	//echo '{"error":{"text":'. $sql .'}}'; exit;
 	try {
-		$db = getConnection();
-		$stmt = $db->prepare($sql);  
-		$stmt->bindParam("token", $token);
-		$stmt->execute();
-		$res = $stmt->fetchObject(); 
-		//echo '{"error":{"text":'. $res .'}}'; exit;
+		$db_host="127.0.0.1";
+		$db_user="root";
+		$db_pass="";
+		$db_name="myavazone_db";
+        $db = new DB();
+		$db->connect($db_host, $db_user, '', false, false, $db_name, 'tbl_');
+		$res_q = $db->query($sql); 
+		$res=$db->fetch_array($res_q);
+		//echo '{"error":{"text":'.json_encode($res).'}}'; exit;
 		//return print_r($res); 
 		$db = null;
 		
@@ -163,7 +248,7 @@ function validate_token($token) {
 			return 'not valid';
 		}
 		exit;
-	} catch(PDOException $e) {
+	} catch(Exception $e) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
 	}
 }
@@ -232,17 +317,6 @@ function findByName($query) {
 	} catch(PDOException $e) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
 	}
-}
-
-function getConnection() {
-	$dbhost="127.0.0.1";
-	$dbuser="root";
-	$dbpass="";
-	$dbname="myavazone_db";
-	/*$dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);	
-	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);*/
-	$dbh
-	return $dbh;
 }
 
 ?>
