@@ -41,6 +41,8 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
+$route['customer_manage'] = 'user/cust_manage';
+$route['customer_manage/new'] = 'user/add_customer';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

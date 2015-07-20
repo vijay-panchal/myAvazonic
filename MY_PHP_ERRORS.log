@@ -4,3 +4,12 @@
 [23-Jun-2015 15:31:59 Europe/Berlin] PHP Parse error:  syntax error, unexpected '$password' (T_VARIABLE), expecting ')' in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\controllers\account.php on line 28
 [23-Jun-2015 15:32:16 Europe/Berlin] PHP Parse error:  syntax error, unexpected '$password' (T_VARIABLE), expecting ')' in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\controllers\account.php on line 28
 [23-Jun-2015 16:01:34 Europe/Berlin] PHP Fatal error:  Cannot use object of type stdClass as array in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\controllers\account.php on line 49
+[16-Jul-2015 10:05:14 Europe/Berlin] PHP Parse error:  syntax error, unexpected ';' in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\controllers\account.php on line 62
+[16-Jul-2015 15:45:11 Europe/Berlin] PHP Fatal error:  Call to a member function select() on a non-object in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\libraries\Usermodules.php on line 7
+[16-Jul-2015 15:45:55 Europe/Berlin] PHP Fatal error:  Call to a member function query() on a non-object in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\libraries\Usermodules.php on line 7
+[16-Jul-2015 15:47:20 Europe/Berlin] PHP Fatal error:  Call to a member function query() on a non-object in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\libraries\Usermodules.php on line 8
+[16-Jul-2015 15:51:13 Europe/Berlin] PHP Fatal error:  Call to a member function query() on a non-object in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\libraries\Usermodules.php on line 23
+[16-Jul-2015 15:52:25 Europe/Berlin] PHP Fatal error:  Call to a member function database() on a non-object in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\libraries\Usermodules.php on line 12
+[16-Jul-2015 15:53:47 Europe/Berlin] PHP Fatal error:  Call to a member function query() on a non-object in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\libraries\Usermodules.php on line 23
+[16-Jul-2015 15:55:48 Europe/Berlin] PHP Fatal error:  Call to a member function get() on a non-object in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\views\templates\sidebar.php on line 4
+[20-Jul-2015 12:53:35 Europe/Berlin] PHP Fatal error:  Call to undefined method CI_Session::get_flashdata() in D:\xampp\htdocs\clients\beta.myAvazonic.com\www\application\views\templates\show_error.php on line 2

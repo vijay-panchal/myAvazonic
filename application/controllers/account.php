@@ -6,7 +6,6 @@ class Account extends CI_Controller {
 	{
 			parent::__construct();
 			//$this->load->model('news_model');
-			$this->load->library('session');
 	}
 
 	public function index()
@@ -23,7 +22,7 @@ class Account extends CI_Controller {
 	public function login()
 	{
 		$data['base_url']=base_url();
-        $data['title'] = 'My Avazonic :: ';
+        $data['title'] = 'My Avazonic :: Login';
 		
 		$username = $this->input->post('username');
 		//echo $username;
@@ -33,25 +32,31 @@ class Account extends CI_Controller {
 			$password = $this->input->post('password');
 			//Call Api
 			$callurl= $data['base_url'].'api/users';
-			$this->curl->create($callurl);
-			
 			
 			$params=array(
+				'URL'			=>	$callurl,
 				'access_token' 	=> ACCESS_TOKEN,
 				'cmd'			=> 'user_login',
 				'username' 		=> $username,
 				'password' 		=> $password,
 			);
-			
-			$this->curl->post(json_encode($params));
-			
-			$result = json_decode($this->curl->execute());
-			
-			//print_r($result);exit;
-			$this->session->set_userdata($result->apidata);
-			$res_session=$this->session->all_userdata();
-			
-			redirect('/home', 'location');
+
+			$response=json_decode($this->customcurl->call($params));
+			//print_r($response);exit;
+			if($response->error=='')
+			{
+				//Session data set;
+				$this->session->set_userdata($response->apidata);
+				$res_session=$this->session->all_userdata();
+				$this->session->set_flashdata('custom_msg', "Login successfully");
+				
+				//login successfully redirect page define
+				redirect('/home', 'location');
+			}
+			else{
+				$this->session->set_flashdata('custom_error', $response->error);
+				
+			}
 		}
 		
 		
@@ -64,6 +69,8 @@ class Account extends CI_Controller {
 	public function logout()
 	{
 		$this->session->sess_destroy();
+		//$this->session->set_flashdata('custom_msg', "Logout successfully");
+		//print_r($this->session);exit;
 		redirect('/home', 'location');
 	}
 	
@@ -99,7 +106,6 @@ class Account extends CI_Controller {
 			echo 'Something has gone wrong';
 		}
 	}
-	
 	
 	
 	public function checkuserloggedin()

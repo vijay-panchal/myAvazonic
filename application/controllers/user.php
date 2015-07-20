@@ -56,7 +56,7 @@ class User extends CI_Controller {
 		$this->load->vars($data);
 
 	    $data['base_url']=base_url();
-        $data['title'] = 'My Avazonic :: ';
+        $data['title'] = 'My Avazonic :: Customer List';
 
         $this->load->view('templates/header', $data);
 		$this->load->view('templates/navigation', $data);

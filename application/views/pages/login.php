@@ -1,3 +1,6 @@
+<?php
+	$this->load->view('templates/show_error');
+?>
 <div class="wrapper">
 		<div class="container">
 			<div class="row">

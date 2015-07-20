@@ -6,7 +6,6 @@ class Home extends CI_Controller {
 	{
 			parent::__construct();
 			//$this->load->model('news_model');
-			$this->load->library('session');
 	}
 
 	public function index()
@@ -37,7 +36,8 @@ class Home extends CI_Controller {
 		}
 		else
 		{
-			redirect('/account/login', 'refresh');
+			$this->session->set_flashdata('custom_msg', "Logout successfully");
+			redirect('/account/login', 'location');
 		}
 		
 	}

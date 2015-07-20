@@ -1,3 +1,13 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteRule ^(.*)/index/?$ $1 [L,R=301]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ index.php/$1 [L]
+	Header set Connection keep-alive 
+	Header set Vary "Accept-Encoding"
+</IfModule>
+
 Header add Access-Control-Allow-Origin "*"
 Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type"
 Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
@@ -6,3 +16,4 @@ Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
 php_flag log_errors on 
 php_value error_log D:/xampp/htdocs/clients/beta.myAvazonic.com/www/MY_PHP_ERRORS.log
 </IfModule>
+

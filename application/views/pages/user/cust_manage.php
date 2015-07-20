@@ -6,104 +6,45 @@
 					?>
                     <div class="span9">
                         <div class="content">
-						 <table width="100%" cellspacing="0" cellpadding="0" border="0">
-								<tbody>
+							<div class="module">
+								<div class="module-head">
+									<h3>User Manager</h3>
+								</div>
+								<div class="module-option clearfix">
+									<div class="pull-left">
+										Filter : &nbsp;
+										<div class="btn-group">
+											<button class="btn">Choose</button>
+											<button class="btn dropdown-toggle" data-toggle="dropdown">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">User Name</a></li>
+												<li><a href="#">Email</a></li>
+												<li><a href="#">Status</a></li>
+												<li class="divider"></li>
+												<li><a href="#">Active</a></li>
+												<li><a href="#">InActive</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="pull-right">
+										<a href="<?php echo base_url(); ?>customer_manage/new" class="btn btn-primary">Create Customer</a>
+									</div>
+								</div>
+								<div class="module-body">
+									<table class="table table-striped table-bordered table-condensed">
+								  <thead>
 									<tr>
-										<td bgcolor="#2c2c2c" class="smalltext" colspan="2"> 
-											<table width="100%" cellspacing="0" cellpadding="4" border="0" class="dashborder"> 
-												<tbody>
-													<tr>
-														<td valign="middle" align="center" style="background-color: rgb(255, 255, 255);" class="rowerror"> 
-															<b>	User Manager </b>
-														</td>
-													</tr> 
-												</tbody>
-											</table> 
-										</td>
+									  <th>#</th>
+									  <th>User Name</th>
+									  <th>Email</th>
+									  <th>Status</th>
+									  <th>Options</th>
 									</tr>
-									<tr><td><br style="line-height: 6px;"></td></tr>
-									<tr>
-										<td bgcolor="#414142" colspan="2" class="menusection2">
-											<table cellspacing="0" cellpadding="0" border="0">
-												<tbody>
-													<tr height="21"> 
-														<td width="1" bgcolor="#414142">
-															<img height="1" width="1" src="<?php echo base_url();?>assets/images/space.gif">
-														</td>								
-														<td valign="middle" align="center" class="menusection1">
-															<table>
-																<tbody>
-																	<tr>
-																		<td><img height="14px" width="14px" title=";P" alt=";)" src="<?php echo base_url();?>assets/images/down.png"></td>
-																		<td class="smalltext">
-																			<b><a style="color: rgb(255, 255, 255)" href="#">List Users</a></b>
-																		</td>
-																	</tr>
-																</tbody>
-															</table>
-														</td>														
-														<td width="1" class="menudefbg">
-															<img height="21" width="1" src="<?php echo base_url();?>assets/images/space.gif">
-														</td> 
-													
-														<td width="1" bgcolor="#414142">
-															<img height="1" width="1" src="<?php echo base_url();?>assets/images/space.gif">
-														</td>	
-														
-														<td valign="middle" align="center" class="menusection2">
-															<table>
-																<tbody>
-																	<tr>
-																		<td><img height="14px" width="14px" title=";P" src="<?php echo base_url();?>assets/images/add.png"></td>
-																		<td class="smalltext">
-																			<b>
-																			<a style="color: rgb(255, 255, 255)" href="<?php echo base_url(); ?>index.php/user/add_customer">Add New User</a>
-																			</b>
-																		</td>
-																			<td><img width="16" border="0" height="16"  src="<?php echo base_url()?>assets/images/icons/users.jpg"></td>
-																		<td class="smalltext">
-																			<b>
-																			<a style="color: rgb(255, 255, 255)" href="#">Manage Roles</a>
-																			</b>
-																		</td>
-																	</tr>
-																</tbody>
-															</table>
-														</td>
-														
-														<td width="1" class="menudefbg">
-															<img height="21" width="1" src="<?php echo base_url();?>assets/images/space.gif">
-														</td>
-													
-													</tr>
-							 					</tbody>
-											</table>
-										</td> 
-									</tr>				
-								</tbody>
-							</table>
-                             <img height="21" width="1" src="<?php echo base_url();?>assets/images/space.gif">
-                    	 <table width="100%" cellspacing="0" cellpadding="2" border="0" align="center"> 
-								<tbody>
-									<tr><td height="15" align="right" class="text" colspan="7"><span id="#Results"></span></td></tr>
-									<tr>
-										<td class="smalltext" colspan="10" align="right">
-										<?php echo $this->pagination->create_links();?>
-										</td>
-										
-									</tr>
-									<?php
-									// This condition is to include the pagination only if there is more than 1 page?>
-								
-									<tr class="TableHeader">
-										<td class="TableHeader">&nbsp;</td>
-										<td class="TableHeader">User Name</td>
-										<td class="TableHeader">Email</td>
-										<td class="TableHeader">Status</td>
-										<td align="center" class="TableHeader"><b>Options</b></td>
-									</tr>
-									
-									 <?php //var_dump($user);exit;
+								  </thead>
+								  <tbody>
+									<?php //var_dump($user);exit;
 									if(!empty($user))
 									{  
 										$i = 1;
@@ -126,16 +67,14 @@
 											</td>
 											
 											<td valign="middle" align="center" class="smalltext ListData">
+											<table >
+												<tr >
+													<td style="border:none;" title="View"><a href="javascript:void(0);"><i class="icon-zoom-in"></i></a></td>
+													<td style="border:none;" title="Edit"><a href="javascript:void(0);"><i class="icon-edit"></i></a></td>
+													<td style="border:none;" title="Delete"><a href="javascript:void(0);"><i class="icon-trash"></i></a></td>
+												</tr>
+											</table>
 											
-											<img height="21px" width="21px" border="0" title="View" alt="View" src="<?php echo base_url();?>assets/images/window.png" onclick="javascript:View('<?php echo $us->user_id; ?>','<?php #echo $this->paginatorParams;?>')" style="cursor: pointer;"> &nbsp;
-
-											<?php #if(in_array("Edit CMS",$this->PERTERMS)) { ?>
-
-												<img height="21px" width="21px" border="0" title="Edit" alt="Edit" src="<?php echo base_url();?>assets/images/window_edit.png" onclick="javascript:Edit('<?php echo $us->user_id; ?>','<?php# echo $this->paginatorParams;?>')" style="cursor: pointer;"> &nbsp;
-											<?php #} if(in_array("Delete CMS",$this->PERTERMS)) { ?>
-
-												<img height="21px" width="21px" border="0" title="Delete" alt="Delete" src="<?php echo base_url();?>assets/images/window_delete.png" onclick="javascript:User_delete('<?php echo $us->user_id; ?>');" style="cursor: pointer;"> &nbsp;
-											<?php #} ?>
 											</td>
 
 										</tr>	
@@ -149,13 +88,14 @@
 											<td class="smalltext">No records found.</td>
 										</tr>
 									<?php } ?> 
-											
-								</tbody>
-							</table>
+								  </tbody>
+						 </table>
 							
-                        </div>
 					</div>	
-                </div>
+								</div>
+						</div>
+					</div>
+				</div>
             </div>
             <!--/.container-->
         </div>
